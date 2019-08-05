@@ -39,8 +39,11 @@ export default class App extends Component {
 					speaker: 'bot'
 				}
 			],
-			disabled: true
+			disabled: true,
+			waiting: false
 		});
+		let btn = document.getElementById('send-btn');
+		btn.classList.add('hide');
 	}
 
 	onSubmit = (e) => {
@@ -62,7 +65,11 @@ export default class App extends Component {
 			this.robotTalk();
 		}, 1500);
 	} else {
-		alert("blank")
+		let inputField = document.getElementById('inputField');
+		inputField.classList.add('warning');
+		setTimeout(() => {
+				inputField.classList.remove('warning');
+		}, 1000);
 	}
 }
 
@@ -97,6 +104,19 @@ export default class App extends Component {
 	}
 }
 
+deleteMessage = (e, index) => {
+	// let conversation = this.state.responses; 
+	// let pos = e.target[index];
+	// conversation.splice(pos, 1);
+
+	// this.setState({
+	// 	responses: conversation
+	// })
+	e.target.parentElement.classList.add('hide');
+	//probably too simple of a way to do this
+}
+
+
 	render() {
 		let conversation = this.state.responses.map((response, index) =>{
 			return (
@@ -104,44 +124,38 @@ export default class App extends Component {
 				{response.speaker === 'bot' ? <i className="fas fa-robot mr-2" /> : ''}
 					{response.value}
 					{response.speaker === 'person' ? <i className="fas fa-user-alt ml-2" /> : ''}
+					{response.speaker === 'person' ?  <button id="delete-btn" className="ml-1" onClick={this.deleteMessage}>X</button> : ''}
+
+
 			</p>)
 		})
 		return (
 			<main>
-				<div>
-					<h1>{this.state.websiteName}</h1>
-				</div>
-				<div>
-					{conversation}
-					{this.state.waiting ? <Waiting /> : ''}
-				</div>
-				<form onSubmit={this.onSubmit}>
-					<div className="col">
-						<input 
-							className="form-control"
-							type="text"
-							onChange={this.handleChange}
-							value={this.state.value} />
+				<div className="container gradient mt-5 p-5">
+					<div className="title">
+						<h1>{this.state.websiteName}</h1>
 					</div>
-					<div className="col">
-						<button className="btn btn-primary">Send</button>
-					</div> 
-				</form>
+					<div className="main-chat">
+						<div>
+							{conversation}
+							{this.state.waiting ? <Waiting /> : ''}
+						</div>
+						<form onSubmit={(e) => this.onSubmit(e)}>
+							<div className="col">
+								<input 
+									className="form-control"
+									type="text"
+									onChange={this.handleChange}
+									value={this.state.value} 
+									disabled={this.state.disabled} id="inputField" />
+							</div>
+							<div className="col">
+								<button className="btn btn-primary" id="send-btn">Send</button>
+							</div> 
+						</form>
+					</div>
+				</div>
 			</main>
 		);
 	}
 }
-
-// ## Chat Bot Project
-// * *BRIEF*: Create a chat bot application that will allow a user to communicate with a Bot.
-// * 1. There should be an input field and a button that allows a user to add a message item to the conversation
-// * 2. The chatbot should utilize JSON data to store canned responses from the bot!
-// * 3. The conversation should be stored in the State object of a Component, rendered initially from a JSON file.
-// * 4. You should use the .map function to iterate the messages into into Components
-// * 5. After the user adds a message item, make sure to clear the input for a good user experience!
-
-// * BONUSES:
-// * 1. Can you make it so a user could delete a message?
-// * 2. Can you make it so that there is a delay between when the user submits their message and the chatbot responds?
-// * 3. Can you do data validation to make sure that the user has typed a message before allowing them to submit?
-// * 4. Can you make the robot respond dynamically to a message if they robot does not understand it. (for example, if the robot asks "Do you want to eat icecream or cookies" and the user says "a burger" can you make the robot say "Sorry, I do not understand?")
