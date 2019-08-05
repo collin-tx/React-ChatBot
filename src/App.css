@@ -1,0 +1,54 @@
+body {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: whitesmoke;
+  text-align: center;
+}
+
+ul {
+  padding:0;
+}
+
+.gradient {
+    border-radius: 8px;
+}
+
+.fa {
+  cursor: pointer;
+  padding-left: 3px;
+}
+.card-img-top {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+main {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+form {
+  width: 100%; 
+  margin: 0 auto !important;
+}
+
+li {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li b {
+  width: 100%;
+}
+
+.bot {
+  text-align: left;
+}
+
+.person {
+  text-align: right;
+}

@@ -1,0 +1,19 @@
+{
+	"robotResponses": [
+		{
+			"response": "Hello there! What's your name?"
+		},
+		{
+			"response": "Thanks for chatting in. What can I help you with today?"
+		},
+		{
+			"response": "Wow! That's interesting. Tell me more about it."
+		},
+		{
+			"response": "What is your email address, friend?"
+		},
+		{
+			"response": "Have you tried turning it off then turning it back on? :)"
+		}
+	]
+}
